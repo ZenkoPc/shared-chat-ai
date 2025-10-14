@@ -1,0 +1,38 @@
+import jsonwebtoken from 'jsonwebtoken'
+
+export class JWTTokens {
+
+    private JWT
+    private secret
+    private static instance: JWTTokens
+
+    constructor(){
+        this.JWT = jsonwebtoken
+        this.secret = process.env.JWT_SECRET
+    }
+
+    public static getInstance(): JWTTokens {
+        if (!JWTTokens.instance) {
+            JWTTokens.instance = new JWTTokens()
+        }
+        return JWTTokens.instance
+    }
+
+    sign(payload: object){
+        if(!this.secret) {
+            throw new Error('JWT_SECRET is not defined in environment variables')
+        }
+
+        return this.JWT.sign(payload, this.secret as string, {
+            expiresIn: process.env.JWT_EXPIRES_IN as any || '1h',
+            encoding: 'utf-8'
+        })
+    }
+
+    verify(token: string){
+        return this.JWT.verify(token, this.secret as string, {
+            algorithms: ['HS256']
+        })
+    }
+
+}

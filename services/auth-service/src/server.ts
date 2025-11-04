@@ -7,6 +7,8 @@ dotenv.config();
 
 const app = express();
 
+app.disable('x-powered-by');
+
 const logger = Logger.getInstance();
 
 const PORT = process.env.PORT || 3005;

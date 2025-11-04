@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "zenkopc",
+        "projectKey": "ZenkoPc_shared-chat-ai"
+    }
+}

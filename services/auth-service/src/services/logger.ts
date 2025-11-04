@@ -2,7 +2,8 @@ import pino from "pino"
 
 export class Logger {
 
-    private logger
+    private static instance: Logger
+    private readonly logger
 
     constructor(){
         this.logger = pino({
@@ -16,6 +17,13 @@ export class Logger {
                 }
             }
         })
+    }
+
+    public static getInstance(): Logger {
+        if(!Logger.instance){
+            Logger.instance = new Logger()
+        }
+        return Logger.instance
     }
 
     simpleLog(message: string){

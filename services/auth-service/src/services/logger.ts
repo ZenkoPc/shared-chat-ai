@@ -3,7 +3,7 @@ import pino from "pino"
 export class Logger {
 
     private static instance: Logger
-    private logger
+    private readonly logger
 
     constructor(){
         this.logger = pino({

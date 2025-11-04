@@ -2,8 +2,8 @@ import jsonwebtoken from 'jsonwebtoken'
 
 export class JWTTokens {
 
-    private JWT
-    private secret
+    private readonly JWT
+    private readonly secret
     private static instance: JWTTokens
 
     constructor(){
@@ -24,11 +24,11 @@ export class JWTTokens {
         }
 
         return {
-            accessToken: this.JWT.sign(payload, this.secret as string, {
+            accessToken: this.JWT.sign(payload, this.secret, {
                 expiresIn: process.env.JWT_EXPIRES_IN as any || '1h',
                 encoding: 'utf-8'
             }),
-            refreshToken: this.JWT.sign(payload, this.secret as string, {
+            refreshToken: this.JWT.sign(payload, this.secret, {
                 expiresIn: process.env.JWT_REFRESH_EXPIRES_IN as any || '7d',
                 encoding: 'utf-8'
             })

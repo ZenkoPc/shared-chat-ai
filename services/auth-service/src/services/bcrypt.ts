@@ -2,7 +2,7 @@ import Bcrypt from "bcryptjs"
 
 export class BcryptService {
     private static instance: BcryptService;
-    private bcrypt: typeof Bcrypt;
+    private readonly bcrypt: typeof Bcrypt;
 
     constructor(){
         this.bcrypt = Bcrypt

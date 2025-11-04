@@ -1,7 +1,7 @@
 import { type Response } from "express";
 import { Logger } from "../services/logger.js";
 
-interface validationError {
+interface ValidationError {
     message: string,
     res: Response
 }
@@ -10,8 +10,6 @@ const logger = Logger.getInstance();
 
 export class ErrorHandler {
     private static instance: ErrorHandler
-
-    constructor(){}
 
     public static getInstance(): ErrorHandler {
         if (!this.instance) {
@@ -39,7 +37,7 @@ export class ErrorHandler {
         })
     }
 
-    handleValidationError({ message, res }: validationError){
+    handleValidationError({ message, res }: ValidationError){
         logger.errorLog("Validation Error: " + message + " [400]")
         return this.handle({
             res,
